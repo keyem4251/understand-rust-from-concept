@@ -37,4 +37,6 @@ fn fn_4_2() {
     let temp_kelvin = Kelvin(10.0);
 
     println!("celsius: {}, kelvin: {}", temp_celsius.0, temp_kelvin.0);
+
+    // use reference field in struct
 }
