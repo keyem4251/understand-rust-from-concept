@@ -1,1 +1,1 @@
-# understand-rust-from-rust
+# understand-rust-from-concept
