@@ -43,15 +43,15 @@ fn fn_4_2() {
 fn fn_4_3() {
     #[derive(Debug)]
     struct Person {
-        name: String,
-        age: u8,
+        _name: String,
+        _age: u8,
     }
 
     // 構造体のフィールドにリファレンスを使う
     #[derive(Debug)]
     struct Parents<'a, 'b> {
-        father: &'a Person,
-        mother: &'b Person,
+        _father: &'a Person,
+        _mother: &'b Person,
     }
 
     // new の引数のfatherとParents.fatherが同じライフタイムを持つ
@@ -59,14 +59,14 @@ fn fn_4_3() {
     impl<'a, 'b> Parents<'a, 'b>{
         fn new(father: &'a Person, mother: &'b Person) -> Parents<'a, 'b> {
             Parents {
-                father,
-                mother,
+                _father: father,
+                _mother: mother,
             }
         }
     }
 
-    let taro = Person { name: String::from("taro"), age: 50 };
-    let hanako = Person { name: String::from("hanako"), age: 48 };
+    let taro = Person { _name: String::from("taro"), _age: 50 };
+    let hanako = Person { _name: String::from("hanako"), _age: 48 };
 
     let jiro = Parents::new(&taro, &hanako);
     println!("{:?}", jiro);
