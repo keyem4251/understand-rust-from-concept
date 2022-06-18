@@ -1,6 +1,7 @@
 use std::cmp::Ordering;
 
 pub fn fn_4_4() {
+    // 列挙型
     enum Sign {
         Positive,
         Zero,
