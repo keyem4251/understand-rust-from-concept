@@ -1,6 +1,7 @@
 fn main() {
     fn_4_1();
     fn_4_2();
+    fn_4_3();
 }
 
 fn fn_4_1() {
@@ -37,6 +38,36 @@ fn fn_4_2() {
     let temp_kelvin = Kelvin(10.0);
 
     println!("celsius: {}, kelvin: {}", temp_celsius.0, temp_kelvin.0);
+}
 
-    // use reference field in struct
+fn fn_4_3() {
+    #[derive(Debug)]
+    struct Person {
+        name: String,
+        age: u8,
+    }
+
+    // 構造体のフィールドにリファレンスを使う
+    #[derive(Debug)]
+    struct Parents<'a, 'b> {
+        father: &'a Person,
+        mother: &'b Person,
+    }
+
+    // new の引数のfatherとParents.fatherが同じライフタイムを持つ
+    // e.q. taroとjiro.fatherは同じライフタイムを持つ
+    impl<'a, 'b> Parents<'a, 'b>{
+        fn new(father: &'a Person, mother: &'b Person) -> Parents<'a, 'b> {
+            Parents {
+                father,
+                mother,
+            }
+        }
+    }
+
+    let taro = Person { name: String::from("taro"), age: 50 };
+    let hanako = Person { name: String::from("hanako"), age: 48 };
+
+    let jiro = Parents::new(&taro, &hanako);
+    println!("{:?}", jiro);
 }
