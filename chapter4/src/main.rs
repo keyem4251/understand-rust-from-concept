@@ -1,10 +1,12 @@
 use chapter4::fn_4_4::fn_4_4;
+use chapter4::fn_4_5::fn_4_5;
 
 fn main() {
     fn_4_1();
     fn_4_2();
     fn_4_3();
     fn_4_4();
+    fn_4_5();
 }
 
 fn fn_4_1() {
