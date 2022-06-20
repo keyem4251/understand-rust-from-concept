@@ -1,3 +1,5 @@
+use thiserror::Error;
+
 pub fn fn_4_5() {
     fn_ex_print_result(fn_ex_div_result(10, 5));
     fn_ex_print_result(fn_ex_div_result(10, 0));
@@ -19,8 +21,11 @@ fn fn_ex_print_result<T: std::fmt::Display, E: std::fmt::Display>(ans: Result<T,
     }
 }
 
+#[derive(Error, Debug)]
 enum DivError {
+    #[error("[0] divided by zero")]
     DivByZero(i32), // 0で割り算、i32は分子
+    #[error("Both numerator [0] and denominator [1] are negative")]
     BothNegative(i32, i32), // 分子、分母ともに負の数、2つのi32はそれぞれ分子、分母
 }
 
@@ -37,11 +42,6 @@ fn mydiv(x: i32, y: i32) -> Result<i32, DivError> {
 fn print_mydiv(x: i32, y: i32) {
     match mydiv(x, y) {
         Ok(ans) => println!("no error. ans = {}", ans),
-        Err(DivError::DivByZero(a)) => {
-            println!("{} divided by zero", a)
-        },
-        Err(DivError::BothNegative(a, b)) => {
-            println!("Both numerator {} and denominator {} are negative", a, b)
-        },
+        Err(e) => println!("{}", e),
     }
 }
