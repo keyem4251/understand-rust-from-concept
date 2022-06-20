@@ -4,6 +4,7 @@ pub fn fn_4_5() {
     fn_ex_print_result(fn_ex_div_result(10, 5));
     fn_ex_print_result(fn_ex_div_result(10, 0));
     print_mydiv(5, 2);
+    print_repeat_mydiv(repeat_mydiv(&[(2, 1), (-9, -3), (5, 2)]));
 }
 
 fn fn_ex_div_result(x: i32, y: i32) -> Result<i32, &'static str> {
@@ -43,5 +44,23 @@ fn print_mydiv(x: i32, y: i32) {
     match mydiv(x, y) {
         Ok(ans) => println!("no error. ans = {}", ans),
         Err(e) => println!("{}", e),
+    }
+}
+
+
+fn repeat_mydiv(aray: &[(i32, i32)]) -> Result<Vec<i32>, DivError> {
+    let mut ret = Vec::new();
+    for aa in aray {
+        let ans = mydiv(aa.0, aa.1)?;
+        ret.push(ans);
+        println!("pushed: {} / {} = {}", aa.0, aa.1, ans);
+    }
+    Ok(ret)
+}
+
+fn print_repeat_mydiv(result: Result<Vec<i32>, DivError>) {
+    match result {
+        Ok(v) => println!("{:?}", v),
+        Err(e) => println!("print_repeat_mydiv: {}", e),
     }
 }
