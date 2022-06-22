@@ -1,6 +1,7 @@
 use chapter4::fn_4_4::fn_4_4;
 use chapter4::fn_4_5::fn_4_5;
 use chapter4::fn_4_6::fn_4_6;
+use chapter4::fn_4_7::fn_4_7;
 
 fn main() {
     fn_4_1();
@@ -9,6 +10,7 @@ fn main() {
     fn_4_4();
     fn_4_5();
     fn_4_6();
+    fn_4_7();
 }
 
 fn fn_4_1() {
