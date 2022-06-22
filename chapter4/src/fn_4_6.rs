@@ -34,5 +34,5 @@ fn fn_json_sample() {
     let mut members = json!({});
     members["members"] = json!([taro, hanako]);
 
-    println!("JSON: {}", members.to_string());
+    println!("JSON: {}", members);
 }
