@@ -1,3 +1,5 @@
+use chapter5::section_5_1::fn_5_1;
+
 fn main() {
-    println!("Hello, world!");
+    fn_5_1();
 }
