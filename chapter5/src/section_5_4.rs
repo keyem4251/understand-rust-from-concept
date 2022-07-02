@@ -11,6 +11,8 @@ pub fn fn_5_4() {
 
     say_thankyou_general(&en);
     say_thankyou_general(&sp);
+
+    generi_return_type();
 }
 
 // TとSが同じサイズ(i32, u32)
@@ -87,4 +89,9 @@ fn say_hello_general<T: SayHello>(speaker: &T) {
 
 fn say_thankyou_general<T: SayThankyou>(speaker: &T) {
     speaker.say_thankyou();
+}
+
+// 抽象返却型
+fn generi_return_type() -> impl std::fmt::Display {
+    1
 }
