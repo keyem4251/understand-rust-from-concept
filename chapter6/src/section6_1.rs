@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io::Read;
+use std::io::{Read, BufReader, BufRead};
 
 const BUFSIZE: usize = 1024;
 
@@ -11,7 +11,8 @@ pub fn fn_6_1() {
     match list_6_2() {
         Ok(ok) => println!("OK: {:?}", ok),
         Err(err) => println!("Err: {:?}", err),
-    };    
+    };
+    list_6_3().unwrap();   
 }
 
 fn list_6_1() -> std::io::Result<()> {
@@ -59,6 +60,21 @@ fn list_6_2() -> std::io::Result<()> {
         } else {
             linebuf.push(*cc as char);
         }
+    }
+
+    println!("{:?}", lines);
+
+    Ok(())
+}
+
+fn list_6_3() -> std::io::Result<()> {
+    let f = File::open("input.txt")?;
+    let f = BufReader::new(f);
+
+    let mut lines = Vec::new();
+
+    for ll in f.lines() {
+        lines.push(ll.unwrap());
     }
 
     println!("{:?}", lines);
