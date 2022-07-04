@@ -1,5 +1,6 @@
 use std::fs::File;
-use std::io::{Read, BufReader, BufRead};
+use std::io::Read;
+use crate::line_read::get_lines;
 
 const BUFSIZE: usize = 1024;
 
@@ -69,14 +70,8 @@ fn list_6_2() -> std::io::Result<()> {
 
 fn list_6_3() -> std::io::Result<()> {
     let f = File::open("input.txt")?;
-    let f = BufReader::new(f);
-
-    let mut lines = Vec::new();
-
-    for ll in f.lines() {
-        lines.push(ll.unwrap());
-    }
-
+    let lines = get_lines(f);
+    
     println!("{:?}", lines);
 
     Ok(())
