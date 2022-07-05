@@ -1,4 +1,4 @@
-use std::io::{Read, BufRead, BufReader};
+use std::io::{BufRead, BufReader, Read};
 
 pub fn get_lines<T: Read>(f: T) -> Vec<String> {
     let f = BufReader::new(f);

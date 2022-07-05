@@ -1,7 +1,7 @@
-use std::fs::File;
-use std::io::{Read, Cursor};
-use byteorder::{LittleEndian, ReadBytesExt};
 use crate::line_read::get_lines;
+use byteorder::{LittleEndian, ReadBytesExt};
+use std::fs::File;
+use std::io::{Cursor, Read};
 
 const BUFSIZE: usize = 1024;
 
@@ -32,7 +32,7 @@ fn list_6_1() -> std::io::Result<()> {
             break;
         }
 
-        for cc in  &buf[..read_size]{
+        for cc in &buf[..read_size] {
             if *cc == b'\n' {
                 lines.push(linebuf);
                 linebuf = String::new();
@@ -73,7 +73,7 @@ fn list_6_2() -> std::io::Result<()> {
 fn list_6_3() -> std::io::Result<()> {
     let f = File::open("input.txt")?;
     let lines = get_lines(f);
-    
+
     println!("{:?}", lines);
 
     Ok(())
@@ -85,8 +85,15 @@ fn list_6_4() -> std::io::Result<()> {
 
     let _ = f.read(&mut buf_file_header)?;
     let file_header = BmpFileHeader::parse_file_header(&buf_file_header)?;
-    println!("{:?}, {}, {}, {}, {}", file_header.bfType, file_header.bfSize, file_header.bfReserved1, file_header.bfReserved2, file_header.bfOffBits);
-    
+    println!(
+        "{:?}, {}, {}, {}, {}",
+        file_header.bfType,
+        file_header.bfSize,
+        file_header.bfReserved1,
+        file_header.bfReserved2,
+        file_header.bfOffBits
+    );
+
     Ok(())
 }
 
@@ -115,14 +122,12 @@ impl BmpFileHeader {
         let bfReserved2 = cur.read_u16::<LittleEndian>()?;
         let bfOffBits = cur.read_u32::<LittleEndian>()?;
 
-        Ok(
-            BmpFileHeader {
-                bfType,
-                bfSize,
-                bfReserved1,
-                bfReserved2,
-                bfOffBits,
-            }
-        )
+        Ok(BmpFileHeader {
+            bfType,
+            bfSize,
+            bfReserved1,
+            bfReserved2,
+            bfOffBits,
+        })
     }
 }
