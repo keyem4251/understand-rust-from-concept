@@ -14,7 +14,8 @@ pub fn fn_6_1() {
         Ok(ok) => println!("OK: {:?}", ok),
         Err(err) => println!("Err: {:?}", err),
     };
-    list_6_3().unwrap();   
+    list_6_3().unwrap();
+    list_6_4().unwrap();
 }
 
 fn list_6_1() -> std::io::Result<()> {
@@ -75,6 +76,17 @@ fn list_6_3() -> std::io::Result<()> {
     
     println!("{:?}", lines);
 
+    Ok(())
+}
+
+fn list_6_4() -> std::io::Result<()> {
+    let mut f = File::open("input.bmp")?;
+    let mut buf_file_header = [0_u8; 14];
+
+    let _ = f.read(&mut buf_file_header)?;
+    let file_header = BmpFileHeader::parse_file_header(&buf_file_header)?;
+    println!("{:?}, {}, {}, {}, {}", file_header.bfType, file_header.bfSize, file_header.bfReserved1, file_header.bfReserved2, file_header.bfOffBits);
+    
     Ok(())
 }
 
