@@ -1,7 +1,7 @@
 use crate::line_read::get_lines;
 use byteorder::{LittleEndian, ReadBytesExt};
 use std::fs::File;
-use std::io::{Cursor, Read};
+use std::io::{Cursor, Read, Write};
 
 const BUFSIZE: usize = 1024;
 
@@ -16,6 +16,7 @@ pub fn fn_6_1() {
     };
     list_6_3().unwrap();
     list_6_4().unwrap();
+    list_6_5().unwrap();
 }
 
 fn list_6_1() -> std::io::Result<()> {
@@ -130,4 +131,23 @@ impl BmpFileHeader {
             bfOffBits,
         })
     }
+}
+
+fn list_6_5() -> std::io::Result<()> {
+    let mut fr = File::open("path.txt")?;
+    let mut fw = File::create("output.txt")?;
+
+    let mut buf = [0_u8; BUFSIZE];
+
+    loop {
+        let read_size = fr.read(&mut buf)?;
+
+        if read_size == 0 {
+            break;
+        } else {
+            let _ = fw.write(&buf[..read_size])?;
+        }
+    }
+
+    Ok(())
 }
