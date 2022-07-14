@@ -1,3 +1,5 @@
+use chapter7::section7_1::section7_1;
+
 fn main() {
-    println!("Hello, world!");
+    section7_1();
 }
