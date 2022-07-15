@@ -1,2 +1,2 @@
 # understand-rust-from-concept
-try understand-rust-from-concept
+try book example in understand-rust-from-concept  
