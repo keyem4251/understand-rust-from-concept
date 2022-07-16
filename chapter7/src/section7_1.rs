@@ -3,6 +3,7 @@ pub fn section7_1() {
     list7_2();
     list7_3();
     list7_4();
+    list7_5();
 }
 
 fn list7_1() {
@@ -59,4 +60,10 @@ fn list7_4() {
     for ii in &vv {
         println!("{}", ii);
     }
+}
+
+fn list7_5() {
+    let c = "あいうえお";
+    let c_vec = c.chars().collect::<Vec<char>>();
+    println!("{:?}", c_vec);
 }
