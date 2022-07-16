@@ -2,6 +2,7 @@ pub fn section7_1() {
     list7_1();
     list7_2();
     list7_3();
+    list7_4();
 }
 
 fn list7_1() {
@@ -46,4 +47,16 @@ fn list7_3() {
 
     *x += 10;
     println!("{:?}", vv);
+}
+
+fn list7_4() {
+    let vv = vec![1, 2, 3, 4];
+
+    for ii in &vv {
+        println!("{}", ii);
+    }
+
+    for ii in &vv {
+        println!("{}", ii);
+    }
 }
