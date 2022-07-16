@@ -1,6 +1,7 @@
 pub fn section7_1() {
     list7_1();
     list7_2();
+    list7_3();
 }
 
 fn list7_1() {
@@ -31,4 +32,18 @@ fn list7_2() {
     // 参照のためエラーにならない
     let x = vv[2];
     println!("{}", x);
+}
+
+fn list7_3() {
+    let mut vv = vec![1, 2, 3, 4];
+    let mut iter = (&mut vv).iter_mut();
+
+    let x = iter.next().unwrap();
+    println!("{}", x);
+
+    let x = iter.next().unwrap();
+    println!("{}", x);
+
+    *x += 10;
+    println!("{:?}", vv);
 }
