@@ -7,6 +7,7 @@ pub fn section7_2() {
     list7_2();
     list7_3();
     list7_4();
+    list7_5();
 }
 
 fn fact(n: u32) -> u32 {
@@ -46,3 +47,7 @@ fn list7_4() {
     println!("{:?}", v);
 }
 
+fn list7_5() {
+    let sum = vec![0, 1, 2, 3].into_iter().fold(0, |x, y| x + y);
+    println!("{:?}", sum);
+}
