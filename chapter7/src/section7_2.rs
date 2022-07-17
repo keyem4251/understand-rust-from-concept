@@ -3,6 +3,8 @@ pub fn section7_2() {
 
     let vv = vec![0, 1, 2, 3];
     println!("{:?}", list7_1(vv));
+
+    list7_2();
 }
 
 fn fact(n: u32) -> u32 {
@@ -21,4 +23,13 @@ fn list7_1(vv: Vec<i32>) -> Vec<i32> {
     }
 
     ret 
+}
+
+fn add_one(x :i32) -> i32 {
+    x + 1
+}
+
+fn list7_2() {
+    let v: Vec<i32> = vec![0, 1, 2, 3].into_iter().map(add_one).collect();
+    println!("{:?}", v);
 }
