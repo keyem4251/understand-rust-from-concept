@@ -6,6 +6,7 @@ pub fn section7_2() {
 
     list7_2();
     list7_3();
+    list7_4();
 }
 
 fn fact(n: u32) -> u32 {
@@ -39,3 +40,9 @@ fn list7_3() {
     let v: Vec<i32> = vec![0, 1, 2, 3].into_iter().map(|x| x + 1).collect();
     println!("{:?}", v);
 }
+
+fn list7_4() {
+    let v: Vec<i32> = vec![0, 1, 2, 3].into_iter().filter(|&x| x >= 1).collect();
+    println!("{:?}", v);
+}
+
