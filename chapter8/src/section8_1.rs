@@ -1,4 +1,5 @@
 use std::thread::spawn;
+use std::sync::{Arc, Mutex};
 
 const N_MAX: usize = 1000;
 const N_THREAD: usize = 4;
@@ -10,6 +11,7 @@ pub fn section8_1() {
     list8_1();
     list8_2();
     list8_3().unwrap();
+    list8_4();
 }
 
 fn list8_1() {
@@ -57,4 +59,24 @@ fn list8_3() -> std::thread::Result<()> {
 
     assert_eq!(ans, N_MAX * (N_MAX + 1) / 2);
     Ok(())
+}
+
+fn list8_4() {
+    let data = Arc::new(Mutex::new(Vec::new()));
+    let added = vec![1, 2, 3, 4];
+
+    let mut thrd = Vec::new();
+    for aa in added {
+        let data = Arc::clone(&data);
+        let th = spawn(move || {
+            let mut data = data.lock().unwrap();
+            data.push(aa)
+        });
+        thrd.push(th);
+    }
+
+    thrd.into_iter().for_each(|th| th.join().unwrap());
+    let x = data.lock().unwrap();
+
+    println!("{:?}", x);
 }
