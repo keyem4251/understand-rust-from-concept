@@ -1,5 +1,6 @@
 use std::thread::spawn;
 use std::sync::{Arc, Mutex};
+use std::sync::mpsc::channel;
 
 const N_MAX: usize = 1000;
 const N_THREAD: usize = 4;
@@ -12,6 +13,7 @@ pub fn section8_1() {
     list8_2();
     list8_3().unwrap();
     list8_4();
+    list8_5();
 }
 
 fn list8_1() {
@@ -79,4 +81,20 @@ fn list8_4() {
     let x = data.lock().unwrap();
 
     println!("{:?}", x);
+}
+
+fn list8_5() {
+    let data = vec![1, 2, 3];
+    let (tx, rx) = channel();
+
+    let data_len = data.len();
+
+    for dd in data {
+        let tx = tx.clone();
+        spawn(move || tx.send(dd));
+    }
+
+    for _ in 0..data_len {
+        println!("{}", rx.recv().unwrap());
+    }
 }
