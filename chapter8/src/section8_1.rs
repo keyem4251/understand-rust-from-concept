@@ -1,8 +1,15 @@
 use std::thread::spawn;
 
+const N_MAX: usize = 1000;
+const N_THREAD: usize = 4;
+
+const N_ELEM_PER_THRD: usize = N_MAX / N_THREAD;
+const RESIDUAL: usize = N_MAX % N_THREAD;
+
 pub fn section8_1() {
     list8_1();
     list8_2();
+    list8_3().unwrap();
 }
 
 fn list8_1() {
@@ -25,4 +32,29 @@ fn list8_2() {
     }
     let x: Vec<()> = v_threads.into_iter().map(|th| th.join().unwrap()).collect();
     println!("{:?}", x);
+}
+
+fn list8_3() -> std::thread::Result<()> {
+    if RESIDUAL != 0 {
+        panic!("invalid combination of N_MAX and N_THREAD");
+    }
+
+    let mut thrd = Vec::new();
+    let v = std::sync::Arc::new((1..=N_MAX).collect::<Vec<usize>>());
+
+    // 1..=N_MAXをN_THREADに分割してそれぞれの和をスレッドで計算
+    for ii in 0..N_THREAD {
+        let ist = ii * N_ELEM_PER_THRD;
+        let ien = ist + N_ELEM_PER_THRD;
+        let vv = std::sync::Arc::clone(&v);
+        let th = spawn(move || vv[ist..ien].iter().sum::<usize>());
+        thrd.push(th);
+    }
+
+    // 各スレッドで計算した値を集めて、その和を取り、全体の和を求める
+    let ans: usize = thrd.into_iter().map(|r| r.join().unwrap()).sum::<usize>();
+    println!("{}", ans);
+
+    assert_eq!(ans, N_MAX * (N_MAX + 1) / 2);
+    Ok(())
 }
